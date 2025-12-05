@@ -8,17 +8,20 @@ namespace MongoDBPratica.Context
         private const string _server = "mongodb://localhost:27017/";
         private const string _db = "MongoDBPratica";
         private const string _collection = "Produto";
-        //public List<Produto> ConnectionCreate()
-        public List<Produto> GetAllProdutos()
+
+        private static IMongoDatabase CreateConnect()
         {
             var client = new MongoClient(_server);
             var db = client.GetDatabase(_db);
+
+            return db;
+        }
+
+        public static IMongoCollection<Produto> GetCollection()
+        {
+            var db = CreateConnect();
             var myColl = db.GetCollection<Produto>(_collection);
-
-            var filter = Builders<Produto>.Filter.Empty;
-            var produtos = myColl.Find(filter).ToList();
-
-            return produtos;
+            return myColl;
         }
     }
 }

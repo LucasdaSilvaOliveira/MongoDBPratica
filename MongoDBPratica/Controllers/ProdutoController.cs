@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using MongoDBPratica.Context;
 
 namespace MongoDBPratica.Controllers
 {
@@ -7,15 +8,17 @@ namespace MongoDBPratica.Controllers
     [ApiController]
     public class ProdutoController : ControllerBase
     {
-        public ProdutoController()
+        private readonly ProdutoContext _produtoContext;
+        public ProdutoController(ProdutoContext produtoContext)
         {
-            
+            _produtoContext = produtoContext;
         }
 
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            return Ok("Testando");
+            var produtos = _produtoContext.GetAllProdutos();
+            return Ok(produtos);
         }
     }
 }
