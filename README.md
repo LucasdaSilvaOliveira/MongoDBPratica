@@ -1,1 +1,1 @@
-Projeto realizado para praticar MongoDB
+Projeto realizado para praticar banco NoSQL - Integração com MongoDB
